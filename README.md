@@ -1,4 +1,4 @@
-## 💻 UMC SpringBoot Study ✏️
+## 💻 UMC Web Study ✏️
 
  ### 📥 프로젝트 시작하기
 

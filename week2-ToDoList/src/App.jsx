@@ -53,6 +53,22 @@ function App() {
     }
   };
 
+  const changeVisiblity = (e, mode) => {
+    e.target.parentElement.className = 'invisible task';
+    console.log(mode);
+    if (mode === 'start') {
+      e.target.parentElement.nextElementSibling.className = 'visible task';
+    }
+    else if (mode === 'end'){
+      e.target.parentElement.previousElementSibling.className = 'visible task';
+    }
+  }
+
+  const startEdit = (e) => {
+    changeVisiblity(e, 'start');
+    e.target.parentElement.nextElementSibling.firstElementChild.focus();
+  }
+
   const editToDo = (e) => {
     let copy = toDo;
     let idx = e.target.parentNode.parentNode.id;
@@ -63,8 +79,7 @@ function App() {
     };
     console.log(copy[idx]);
     setToDo([...copy]);
-    e.target.parentElement.className = 'invisible task';
-    e.target.parentElement.previousElementSibling.className = 'visible task';
+    changeVisiblity(e, 'end')
   };
 
   let listItems = ''
@@ -80,13 +95,7 @@ function App() {
               ));
             }
           }>삭제하기</button>
-          <button className='editButton' onClick={
-            (e) => {
-              e.target.parentElement.className = 'invisible task';
-              e.target.parentElement.nextElementSibling.className = 'visible task';
-              e.target.parentElement.nextElementSibling.firstElementChild.focus();
-            }
-          }>수정하기</button>
+          <button className='editButton' onClick={startEdit}>수정하기</button>
         </span>
         <span className='invisible task'>
           <input class='taskText' type='text' onChange={handleEditInput} onKeyUp={handleEditedSubmitButton}></input>

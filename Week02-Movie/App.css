@@ -1,0 +1,39 @@
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .movie-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .movie-poster {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .movie-info {
+    padding: 10px;
+  }
+  
+  .movie-info h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .movie-info p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  

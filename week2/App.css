@@ -1,0 +1,50 @@
+/* App.css */
+body {
+    background-color: rgb(185, 190, 255); 
+    margin: 0; 
+    font-family: sans-serif;
+}
+
+.todoForm {
+    margin:25px;
+    margin-bottom: 20px;
+}
+
+.textbox {
+    margin:25px;
+    border-radius: 10px; 
+    border: 2px solid #71b5ff; 
+    padding: 5px; 
+    font-size: 16px; 
+    outline: none; /* 포커스 시 기본 외곽선 제거 */
+    transition: border-color 0.3s; /* 테두리 색상 변경 시 부드러운 전환 효과 */
+}
+
+.textbox:focus {
+    border-color: #0056b3; /* 포커스 시 테두리 색상 변경 */
+}
+
+.todo {
+    color: white; 
+    background-color: rgb(104, 128, 247); 
+    border-radius: 10px; 
+    border: none; 
+    padding: 5px 7px;
+    margin: 10px;
+    cursor: pointer; /* 마우스 포인터 변경 */
+    transition: background-color 0.3s; /* 배경색 변경 시 부드러운 전환 효과 */
+}
+
+.todo:hover {
+    background-color: rgb(81, 98, 200); /* 호버 시 배경색 변경 */
+}
+
+.button{
+    color: white;
+    background-color: rgb(104, 128, 247); 
+    border-radius: 10px; 
+    border: none; 
+    padding: 0 5px; 
+    margin: 5px; 
+    font-size:13px;
+}

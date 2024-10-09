@@ -19,8 +19,8 @@ function App() {
       alert('제대로 입력해라!');
       return;
     }
-    setTodos((prev) => [
-      ...prev,
+    setTodos((prev) => [//여기서 prev는 이전 상태의 값을 기억해서 가져옴. setCount보다 여기서 더 적합한듯
+      ...prev,//얕은 복사
       { id: Math.floor(Math.random() * 100) + 2, task: text },
     ]);
     setText('');

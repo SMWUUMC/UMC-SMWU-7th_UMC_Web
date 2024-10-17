@@ -34,13 +34,13 @@ const StyledButton = styled(Link)`
     transition: filter 0.5s;
 
     &:hover {
-        filter: drop-shadow(0 0 0.75rem #c40c49);
+        filter: brightness(0.9);
     }
 `
 
 export const HoverNavbarButton = (props) => {
     return (
-        <HoverStyledButton 
+        <StyledButton 
             to={props.to} 
             margin={props.margin} 
             textcolor={props.textcolor} 
@@ -50,14 +50,8 @@ export const HoverNavbarButton = (props) => {
             right={props.right}
         >
             {props.text}
-        </HoverStyledButton>
+        </StyledButton>
     )
 }
-
-export const HoverStyledButton = styled(StyledButton)`
-    &:hover {
-        filter: brightness(0.5);
-    }
-`
 
 export default NavbarButton;

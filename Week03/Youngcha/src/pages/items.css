@@ -1,0 +1,15 @@
+.movie-item {
+    width: 170px;
+    margin: 5px;
+  }
+  .movie-item > h5, p {
+    margin: 0px;
+  }
+  .movie-poster {
+    width: 170px;
+    height: 240px;
+    border-radius: 10px;
+  }
+  .movie-poster:hover {
+    filter: brightness(50%)
+  }

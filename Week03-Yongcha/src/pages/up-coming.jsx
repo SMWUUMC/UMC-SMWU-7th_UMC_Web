@@ -6,7 +6,7 @@ function UpComing() {
 
   useEffect(() => {
     const getMovies = async () => {
-        const movies = await axios.get(`https://api.themoviedb.org/3/movie/up-coming?language=ko-KR&page=1`, {
+        const movies = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?language=ko-KR&page=1`, {
             headers: {
                 Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkY2E3N2Y0N2MyMGEyNzliNjUwMDk5NDUwNjc0ZTE5NyIsIm5iZiI6MTcyODYyNjg2Ni43MDA3ODUsInN1YiI6IjY3MDRjZDdkNGIwYzViOWQ3MTY5YzRiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dSJqlKGb6Dd5BDcVd0VwLOmoqGAo5V1rdJl2yFa75w8`
             }

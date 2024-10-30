@@ -1,0 +1,39 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 135px;
+    height: 100vh;
+    background-color: #111;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ff357e;
+  }
+  
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    margin-top: 60px; /* 네비게이션 바 높이만큼 아래로 내려줌 */
+  }
+  
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  
+  .icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .menu-item:hover {
+    color: #ff357e;
+  }  

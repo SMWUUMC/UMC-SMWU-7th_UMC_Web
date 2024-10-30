@@ -1,0 +1,40 @@
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.sign-up-form input[type="email"],
+.sign-up-form input[type="password"] {
+  width: 200px;
+  height: 25px;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 4px; /* 입력창, 오류 메시지 간격 */
+}
+
+.sign-up-form input[type="submit"] {
+  width: 48px;
+  height: 25px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: #b0b7b1;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.sign-up-form input[type="submit"]:hover {
+  background-color: #929892;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+  text-align: left;
+  width: 200px; /* 입력창 너비에 맞춤 */
+}

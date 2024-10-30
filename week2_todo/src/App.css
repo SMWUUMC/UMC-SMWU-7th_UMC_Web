@@ -1,0 +1,87 @@
+body {
+    background-color:bisque;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page{
+    text-align: center;
+}
+
+.title{
+    color: rgb(90, 49, 22);
+    font-size: 35px;
+}
+
+.todo-index { 
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    border: solid rgb(100, 80, 67) 3px;
+    background-color: antiquewhite;
+    margin-bottom: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-area {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.edit-area{
+    margin-left: 5px;
+    margin-top: 5px;
+    height: 40px;
+    width: 170px;
+    font-weight: bold;
+}
+
+.delete-edit {
+    padding: 7px 15px;
+    margin: 6px;
+    border-radius: 30px;
+    border: solid rgb(100, 80, 67) 1.5px;
+    background-color: bisque;
+    cursor: pointer;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.add-input{
+    padding: 5px;
+    width: 400px;
+    height: 30px;
+    border: solid rgb(100, 80, 67) 4px; 
+    margin-bottom: 20px;
+}
+
+.add-button{
+    padding: 14.5px 12px;
+    margin-left: 12px;
+    border: none;
+    background-color: rgb(100, 80, 67);
+    color: white;
+    cursor: pointer;
+}
+
+.end-edit{
+    padding: 7px 15px;
+    margin: 6px;
+    border-radius: 30px;
+    border: solid  rgb(100, 80, 67) 1.5px;
+    background-color: rgb(100, 80, 67);
+    color: white;
+    cursor: pointer;
+}

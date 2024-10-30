@@ -22,7 +22,7 @@
   }
   
   .login-input {
-    width: 100%;
+    width: 85%;
     height: 40px;
     padding: 0 10px;
     font-size: 16px;
@@ -31,7 +31,7 @@
   }
   
   .login-button {
-    width: 107%;
+    width: 92%;
     height: 40px;
     font-size: 16px;
     font-weight: bold;
@@ -50,6 +50,7 @@
     color: red;
     font-size: 14px;
     margin: 0;
-    width: 100%;
+    padding-left: 5px;
     text-align: left;
+    width: 100%;
   }  

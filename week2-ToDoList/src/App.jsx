@@ -83,7 +83,6 @@ function App() {
   };
 
   let listItems = ''
-
     listItems = toDo.map((item) => 
       <li className='taskContainer' key={item.num} id={toDo.indexOf(item)}>
         <span className='visible task'>

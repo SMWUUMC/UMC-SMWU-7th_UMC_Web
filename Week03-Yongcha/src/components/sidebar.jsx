@@ -1,35 +1,61 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FiSearch, FiFilm } from 'react-icons/fi';
+import { FaSearch, FaFilm } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
-  width: 200px;
-  background-color: #2c2c2c;
-  padding: 20px;
-  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 150px;
   height: 100vh;
+  background-color: #111;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ff357e;
 `;
 
-const SidebarItem = styled(Link)`
+const SidebarMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-top: 72px; /* 네비게이션 바 아래로 메뉴를 내리기 위한 여백 */
+  margin-left: 27px;
+`;
+
+const MenuItem = styled(Link)`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   color: white;
+  font-size: 18px;
   text-decoration: none;
 
   &:hover {
-    color: #ff007f;
+    color: #ff357e;
   }
 `;
 
-function Sidebar() {
+const Icon = styled.span`
+  margin-right: 8px;
+  font-size: 18px;
+`;
+
+const Sidebar = () => {
   return (
     <SidebarContainer>
-      <SidebarItem to="/search"><FiSearch /> 찾기</SidebarItem>
-      <SidebarItem to="/category"><FiFilm /> 영화</SidebarItem>
+      <SidebarMenu>
+        <MenuItem to="/search">
+          <Icon><FaSearch /></Icon> 찾기
+        </MenuItem>
+        <MenuItem to="/movies">
+          <Icon><FaFilm /></Icon> 영화
+        </MenuItem>
+      </SidebarMenu>
     </SidebarContainer>
   );
-}
+};
 
 export default Sidebar;

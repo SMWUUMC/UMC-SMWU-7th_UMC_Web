@@ -1,36 +1,35 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RootLayout from './layout/root-layout';
-import HomePage from './pages/home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/login';
-import SignupPage from './pages/signup';
+import SignUpPage from './pages/signup';
+import HomePage from './pages/home';
+import MoviesPage from './pages/movies';
 import SearchPage from './pages/search';
-import CategoryPage from './pages/categories';
-import NowPlaying from './pages/now-playing';
-import Popular from './pages/popular';
-import TopRated from './pages/top-rated';
-import UpComing from './pages/up-coming';
+import NowPlayingPage from './pages/now-playing';
+import PopularPage from './pages/popular';
+import TopRatedPage from './pages/top-rated';
+import UpComingPage from './pages/up-coming';
+import RootLayout from './components/root-layout';
+import styled from 'styled-components';
 
-function App() {
+const App = () => {
   return (
-    <div style={{ color: "white", backgroundColor: "black" }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<RootLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="signup" element={<SignupPage />} />
-            <Route path="search" element={<SearchPage />} />
-            <Route path="category" element={<CategoryPage />} />
-            <Route path="movies/now-playing" element={<NowPlaying />} />
-            <Route path="movies/popular" element={<Popular />} />
-            <Route path="movies/top-rated" element={<TopRated />} />
-            <Route path="movies/up-coming" element={<UpComing />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<SignUpPage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="movies/now-playing" element={<NowPlayingPage />} />
+          <Route path="movies/popular" element={<PopularPage />} />
+          <Route path="movies/top-rated" element={<TopRatedPage />} />
+          <Route path="movies/up-coming" element={<UpComingPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

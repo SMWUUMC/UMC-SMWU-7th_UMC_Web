@@ -1,38 +1,67 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
+import Card from '../components/card';
 
-function TopRated() {
+const API_KEY = 'c162b6d4cd35f86d09a271a0500f6bf9';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+const MoviesContainer = styled.div`
+  padding: 20px;
+  margin-left: 150px;
+  color: white;
+`;
+
+const Title = styled.h2`
+  font-size: 24px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+`;
+
+const MovieGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+`;
+
+const TopRatedPage = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const getMovies = async () => {
-        const movies = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1`, {
-            headers: {
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkY2E3N2Y0N2MyMGEyNzliNjUwMDk5NDUwNjc0ZTE5NyIsIm5iZiI6MTcyODYyNjg2Ni43MDA3ODUsInN1YiI6IjY3MDRjZDdkNGIwYzViOWQ3MTY5YzRiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dSJqlKGb6Dd5BDcVd0VwLOmoqGAo5V1rdJl2yFa75w8`
-            }
-        })
-        setMovies(movies);
-    }
-    getMovies();
+    const fetchNowPlayingMovies = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/movie/top_rated`, {
+          params: {
+            api_key: API_KEY,
+            language: 'ko-KR',
+            page: 1,
+          },
+        });
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error('Error fetching now playing movies:', error);
+      }
+    };
+
+    fetchNowPlayingMovies();
   }, []);
 
   return (
-    <div>
-      <h1>높은 평가를 받은 영화</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+    <MoviesContainer>
+      <Title>높은 평가를 받은 영화</Title>
+      <MovieGrid>
         {movies.map((movie) => (
-          <div key={movie.id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w200/${props.movie.poster_path}`}
-              alt={movie.title}
-              style={{ width: '100%' }}
-            />
-            <p>{movie.title}</p>
-          </div>
+          <Card
+            key={movie.id}
+            title={movie.title}
+            releaseDate={movie.release_date}
+            posterPath={`${IMAGE_BASE_URL}${movie.poster_path}`}
+          />
         ))}
-      </div>
-    </div>
+      </MovieGrid>
+    </MoviesContainer>
   );
-}
+};
 
-export default TopRated;
+export default TopRatedPage;

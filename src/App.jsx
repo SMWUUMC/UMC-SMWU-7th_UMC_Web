@@ -15,6 +15,8 @@ import TopRated from "./pages/top-rated.jsx";
 import UpComing from "./pages/up-coming.jsx";
 import RootLayout from "./layout/root-layout.jsx";
 import MovieDetail from "./pages/movie-detail.jsx";
+import LogIn from "./pages/log-in.jsx";
+import SignUp from "./pages/sign-up.jsx";
 
 // 전역 스타일 정의
 const GlobalStyle = createGlobalStyle`
@@ -61,8 +63,8 @@ const router = createBrowserRouter([
       { path: "movies/top-rated", element: <TopRated /> },
       { path: "movies/up-coming", element: <UpComing /> },
 
-      { path: "login", element: <div>로그인 페이지</div> },
-      { path: "signup", element: <div>회원가입 페이지</div> },
+      { path: "login", element: <LogIn /> },
+      { path: "signup", element: <SignUp /> },
       { path: "search", element: <div>검색 페이지</div> },
     ],
   },

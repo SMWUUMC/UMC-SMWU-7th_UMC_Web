@@ -1,0 +1,41 @@
+.signup-container{
+    display: flexbox;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 120px;
+    margin-left: -10px;
+    gap:10px;
+}
+
+.signup{
+    margin-bottom: 40px;
+}
+
+.inputBox{
+    width: 320px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1.5px solid rgb(255, 0, 98);
+}
+
+.submitBtn{
+    background-color: rgb(255, 0, 98);
+    width: 320px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.submitBtn:hover{
+    background-color: rgb(180, 0, 69);
+}
+
+.submitBtn[disabled] {
+    background-color: gray;
+    cursor: not-allowed;
+}

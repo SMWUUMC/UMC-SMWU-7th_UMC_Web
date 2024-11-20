@@ -39,7 +39,7 @@ const Home = () => {
         const data = await getTodos();
         setTodos(data);
       } catch (error) {
-        console.error('Failed to fetch todos:', error);
+        console.error(error);
       }
     };
 
@@ -53,7 +53,7 @@ const Home = () => {
       const createdTodo = await createTodo(newTodo);
       setTodos((prevTodos) => [...prevTodos, createdTodo]);
     } catch (error) {
-      console.error('Failed to add todo:', error);
+      console.error(error);
     }
   };
 
@@ -65,7 +65,7 @@ const Home = () => {
         prevTodos.map((todo) => (todo.id === id ? updatedTodo : todo))
       );
     } catch (error) {
-      console.error('Failed to update todo:', error);
+      console.error(error);
     }
   };
 
@@ -75,7 +75,20 @@ const Home = () => {
       await deleteTodo(id);
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
     } catch (error) {
-      console.error('Failed to delete todo:', error);
+      console.error(error);
+    }
+  };
+
+  // 체크박스 부분 구현
+  const handleToggle = async (id) => {
+    try {
+      const todo = todos.find((todo) => todo.id === id);
+      const updatedTodo = await updateTodo(id, { checked: !todo.checked });
+      setTodos((prevTodos) =>
+        prevTodos.map((t) => (t.id === id ? updatedTodo : t))
+      );
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -87,6 +100,7 @@ const Home = () => {
         todos={todos}
         onDelete={deleteTodoById}
         onUpdate={handleUpdateTodo}
+        onToggle={handleToggle}
       />
     </HomeContainer>
   );

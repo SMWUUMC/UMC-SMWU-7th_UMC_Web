@@ -76,9 +76,9 @@ const Item = ({ todo, onDelete, onToggle, onUpdate }) => {
     const handleSave = () => {
         if (!editedTitle.trim() || !editedContent.trim()) {
             return;
-          }
-          onUpdate(todo.id, editedTitle, editedContent);
-          setIsEditing(false);
+        }
+        onUpdate(todo.id, editedTitle, editedContent);
+        setIsEditing(false);
     };
 
     const handleItemClick = () => {
@@ -93,10 +93,8 @@ const Item = ({ todo, onDelete, onToggle, onUpdate }) => {
           <input
             type="checkbox"
             checked={todo.checked}
-            onChange={(e) => {
-              e.stopPropagation(); // 클릭 이벤트 전파 방지
-              onToggle(todo.id);
-            }}
+            onClick={(e) => e.stopPropagation()} // 체크박스 클릭 시 페이지 안 넘어가도록
+            onChange={() => onToggle(todo.id)} // 체크박스 상태 변경
           />
           {isEditing ? (
             <TextContainer>
@@ -122,7 +120,7 @@ const Item = ({ todo, onDelete, onToggle, onUpdate }) => {
           {isEditing ? (
             <StyledButton
               onClick={(e) => {
-                e.stopPropagation(); // 클릭 이벤트 전파 방지
+                e.stopPropagation();
                 handleSave();
               }}
             >
@@ -131,7 +129,7 @@ const Item = ({ todo, onDelete, onToggle, onUpdate }) => {
           ) : (
             <StyledButton
               onClick={(e) => {
-                e.stopPropagation(); // 클릭 이벤트 전파 방지
+                e.stopPropagation(); 
                 setIsEditing(true);
               }}
             >
@@ -141,7 +139,7 @@ const Item = ({ todo, onDelete, onToggle, onUpdate }) => {
           <StyledButton
             className="delete"
             onClick={(e) => {
-              e.stopPropagation(); // 클릭 이벤트 전파 방지
+              e.stopPropagation();
               onDelete(todo.id);
             }}
           >

@@ -1,20 +1,29 @@
 import axiosInstance from '../api/axios-instance';
 
 export const useCustomFetch = () => {
+  
   // 전체 ToDo 가져오기
-  const getTodos = async () => {
+  const getTodos = async (searchQuery = '') => {
     try {
-      const response = await axiosInstance.get('/todo');
+      const response = await axiosInstance.get('/todo', {
+        params: { title: searchQuery }, // Query Parameter 사용
+      });
       return response.data;
     } catch (error) {
-      console.error('Error fetching todos:', error);
+      console.error(error);
       throw error;
     }
   };
+
   // 상세 정보 가져오기
   const getTodoById = async (id) => {
-    const response = await axiosInstance.get(`/todo/${id}`);
-    return response.data;
+    try {
+      const response = await axiosInstance.get(`/todo/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   };
 
   // ToDo 생성
@@ -23,7 +32,7 @@ export const useCustomFetch = () => {
       const response = await axiosInstance.post('/todo', todo);
       return response.data;
     } catch (error) {
-      console.error('Error creating todo:', error);
+      console.error(error);
       throw error;
     }
   };
@@ -34,7 +43,7 @@ export const useCustomFetch = () => {
       const response = await axiosInstance.patch(`/todo/${id}`, updatedTodo);
       return response.data;
     } catch (error) {
-      console.error('Error updating todo:', error);
+      console.error(error);
       throw error;
     }
   };
@@ -42,9 +51,10 @@ export const useCustomFetch = () => {
   // ToDo 삭제
   const deleteTodo = async (id) => {
     try {
-      await axiosInstance.delete(`/todo/${id}`);
+      const response = await axiosInstance.delete(`/todo/${id}`);
+      return response.data;
     } catch (error) {
-      console.error('Error deleting todo:', error);
+      console.error(error);
       throw error;
     }
   };

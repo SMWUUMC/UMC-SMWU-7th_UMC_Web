@@ -8,16 +8,6 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// 간단한 데이터베이스 대체
-let todos = [
-  {
-    id: 1,
-    title: '첫 번째 할 일',
-    content: '할 일의 내용을 여기에 작성하세요.',
-    checked: false,
-  },
-];
-
 // 전체 ToDo 가져오기
 app.get('/todo', (req, res) => {
   res.status(200).json(todos);

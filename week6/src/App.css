@@ -1,0 +1,14 @@
+body{
+    background-color: black;
+    color: white;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+h2{
+    margin: 50px 0px 50px 150px;
+}
+
+h3{
+    margin: 10px 0 50px 0;
+}

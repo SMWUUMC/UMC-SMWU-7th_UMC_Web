@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { CartIcon } from '../constants/icons';
 import { CartList } from '../components/CartList';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearCart } from '../slice/cartSlice';
+import { openModal } from '../slice/modalSlice';
+import Modal from '../components/Modal';
 
 const HomeContainer = styled.div`
   font-family: Arial, sans-serif;
@@ -131,10 +132,9 @@ const Home = () => {
   const totalPrice = items.reduce((total, item) => total + item.amount * item.price, 0);
   const dispatch = useDispatch();
 
-  const handleClearCart = () => {
-    if (window.confirm('담아두신 모든 음반을 삭제하시겠습니까?')) {
-      dispatch(clearCart());
-    }
+  // modal 열기
+  const handleOpenModal = () => {
+    dispatch(openModal());
   };
 
   return (
@@ -159,11 +159,12 @@ const Home = () => {
                 <TotalText>총 가격</TotalText>
                 <TotalPrice>₩ {totalPrice || 0}</TotalPrice>
               </TotalContainer>
-              <ClearCartButton onClick={handleClearCart}>장바구니 초기화</ClearCartButton>
+              <ClearCartButton onClick={handleOpenModal}>장바구니 초기화</ClearCartButton>
             </Footer>
           </>
         )}
       </Main>
+      <Modal />
     </HomeContainer>
   );
 };

@@ -1,0 +1,64 @@
+ul {
+  width: 100%;
+  height: 600px;
+  overflow-y: auto;
+}
+
+li {
+  width: 500px;
+  padding: 10px;
+  display: flex;
+}
+
+input[type="checkbox"] {
+  word-break: break-all;
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  border: 1px solid #999;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+input[type="checkbox"]:checked {
+  background: #50bcdf;
+  border: none;
+  position: relative;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓"; /* 체크 표시 추가 */
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]:checked + .todolist {
+  color: #aaa; /* 체크박스가 선택되면 글씨 색 연하게 변경 */
+  text-decoration: line-through; /* 취소선 추가 */
+}
+
+.todolist {
+  margin-left: 40px;
+  width: 200px;
+  font-size: 25px;
+  line-height: 50px;
+}
+
+.deleteBtn {
+  margin-left: auto;
+  width: 50px;
+  height: 40px;
+  font-size: 25px;
+  border: none;
+  color: #999;
+  background-color: #fff;
+}
+
+.deleteBtn:hover {
+  color: #50bcdf;
+}

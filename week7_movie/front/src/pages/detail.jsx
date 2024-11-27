@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../apis/axios-instance'; 
 import { useQuery } from '@tanstack/react-query';
+import { ClipLoader } from 'react-spinners';
 import "./detail.css";
 
 const fetchMovieDetail = async (movieId) => {
@@ -35,7 +36,11 @@ const MovieDetail = () => {
   });
 
   if (isMovieLoading || isCastLoading) {
-    return <h1 style={{ color: "white" }}>로딩 중...</h1>;
+    return (
+      <div className="loading-container">
+        <ClipLoader color="red" size={70} />
+      </div>
+    );
   }
 
   if (isMovieError || isCastError) {

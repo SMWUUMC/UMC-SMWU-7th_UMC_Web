@@ -1,45 +1,51 @@
 import styled from 'styled-components';
-import useCustomFetch from '../hooks/useCustomFetch';
+import { useCustomFetch } from "../hooks/useCustomFetch";
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
-import { ToDoContext } from '../context/ToDoContext'
 
 const ToDoInputs = () => {
-    const {toDo, inputText, handleSubmit, handleInput} = useContext(ToDoContext);
+    const [title, setTitle] = useState('')
+    const [content, setContent] = useState('')
 
-    // const [toDo, setToDo] = useState({
-    //     title: '',
-    //     content: ''
-    // });
-    // const { register, handleSubmit } = useForm();
+    const {postToDo} = useCustomFetch()
 
-    // let {title, content} = toDo
+    const handleInput = (e) => {
+        const {name, value} = e.target
+        if(name === 'title') {
+            setTitle(value)
+        } else {
+            setContent(value)
+        }
+        console.log(title, content)
+    }
 
-    console.log("ToDo")
-    console.log(toDo)
-    console.log("inputText")
-    console.log(inputText)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('submit')
+        const toDo = {
+            title: title,
+            content: content
+        }
+        postToDo(toDo)
+        setTitle('')
+        setContent('')
+    }
 
-    useCustomFetch('http://localhost:3000/todo')
-
-    // const handleInput = (e) => {
-    //     setToDo({
-    //         ...toDo,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
+    const isInputEmpty = () => {
+        return title.trim() === '' || content.trim() === ''
+    }
 
     return (
-        <InputWrapper onSubmit={handleSubmit}>
-            <Input onChange={handleInput} name='title' type="text" placeholder='제목' value={inputText.title}></Input>
-            <Input onChange={handleInput} name='content' type="text" placeholder='내용' value={inputText.content}></Input>
-            <Button type="submit" value="추가"></Button>
+        <InputWrapper>
+            <Title>To Do List!</Title>
+            <Input name='title' type="text" placeholder='제목' onChange={(e) => handleInput(e)} value={title}></Input>
+            <Input name='content' type="text" placeholder='내용' onChange={(e) => handleInput(e)} value={content}></Input>
+            <Button type="submit" value="추가" onClick={handleSubmit} disabled={isInputEmpty()}></Button>
         </InputWrapper>
     )
 }
 
 const InputWrapper = styled.form`
+    height: 150px;
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -48,6 +54,10 @@ const InputWrapper = styled.form`
     padding: 3rem;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`
+
+const Title = styled.h3`
+    margin-top: 0.5rem;
 `
 
 const Input = styled.input`

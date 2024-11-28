@@ -1,41 +1,53 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useContext } from 'react';
-import { ToDoContext } from '../context/ToDoContext'
+import axiosInstance from "../axios/axiosInstance"
 
-const useCustomFetch = (url) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+export const useCustomFetch = () => {
 
-    const {toDo, setToDo} = useContext(ToDoContext);
-
-    const {title, content} = toDo;
-    
-    console.log("useCustomFetch 진입")
-
-    useEffect(() => {
-        if (title === '' || content === '') return;
-        const fetchData = async () => {
-            setIsLoading(true)
-            try {
-                const response = await axios.post(url, {
-                    "title": title,
-                    "content": content
-                  })
-                console.log(response)
-            } catch (error) {
-                console.log('에러에러')
-                setIsError(true)
-            } finally {
-                setIsLoading(false)
-                setToDo({
-                    title: '',
-                    content: ''
-                })
-            }
+    const getToDos = async () => {
+        try {
+            const response = await axiosInstance.get('/todo')
+            return response.data
+        } catch (error) {
+            console.error(error)
         }
-        fetchData()
-    }, [url, toDo])
-}
+    }
 
-export default useCustomFetch;
+    const getToDoById = async (id) => {
+        try {
+            const response = await axiosInstance.get(`/todo/${id}`)
+            return response.data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const postToDo = async (toDo) => {
+        try {
+            const response = await axiosInstance.post('/todo', toDo)
+            return response.data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const patchToDo = async (toDo) => {
+        try {
+            const response = await axiosInstance.patch(`/todo/${toDo.id}`, toDo)
+            console.log(response)
+            return response.data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const deleteToDo = async (toDo) => {
+        try {
+            const response = await axiosInstance.delete(`/todo/${toDo.id}`)
+            console.log(response)
+            return response.data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    return {getToDos, getToDoById, postToDo, patchToDo, deleteToDo}
+}

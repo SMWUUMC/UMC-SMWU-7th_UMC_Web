@@ -1,144 +1,148 @@
-import styled from 'styled-components';
+import { useState } from "react";
+import { useCustomFetch } from "../hooks/useCustomFetch";
+import { useNavigate } from 'react-router-dom'
+import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
-import { MdEdit, MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
-import useCustomGet from '../hooks/useCustomGet';
-import useCustomDelete from '../hooks/useCustomDelete';
-import { useNavigate } from 'react-router-dom';
+import { MdEdit } from "react-icons/md";
 
-const ToDoItem = () => {
+const ToDoItem = ({ toDo }) => {
 
     const navigate = useNavigate();
 
-    const { data, isLoading, isError } = useCustomGet('http://localhost:3000/todo')
-    
-    const deleteToDo = useCustomDelete();
-    console.log(data.data)
+    const { patchToDo, deleteToDo } = useCustomFetch();
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTitle, setEditedTitle] = useState('')
+    const [editedContent, setEditedContent] = useState('')
 
-    let toDos = []
-
-    if (data.data != undefined) {
-        console.log("로딩끝")
-        toDos = data.data[0];
+    const handleCheck = (e, toDo) => {
+        e.stopPropagation()
+        patchToDo({
+            "id": toDo.id,
+            "checked": !toDo.checked
+        })
     }
 
-    console.log(toDos)
+    const handleDelete = (e, toDo) => {
+        e.stopPropagation()
+        const r = deleteToDo({
+            "id": toDo.id
+        })
+    }
+
+    const changeEditState = (e) => {
+        e.stopPropagation()
+        console.log('edit')
+        setIsEditing(!isEditing)
+        setEditedContent(toDo.content)
+        setEditedTitle(toDo.title)
+    }
+
+    const handleEdit = (e, toDo) => {
+        e.stopPropagation()
+        console.log('edit')
+        patchToDo({
+            "id": toDo.id,
+            "title": editedTitle,
+            "content": editedContent
+        })
+        setIsEditing(!isEditing)
+    }
+
+    const handleInput = (e) => {
+        e.stopPropagation()
+        const { name, value } = e.target
+        if (name === 'title') {
+            setEditedTitle(value)
+        } else {
+            setEditedContent(value)
+        }
+        console.log(editedTitle, editedContent)
+    }
+
+    const isInputEmpty = () => {
+        return editedTitle.trim() === '' || editedContent.trim() === ''
+    }
 
     return (
-        isLoading ? <div>로딩중</div> :
-            isError ? <div>에러발생</div> :
-                <ToDoList>
-                    {
-                        toDos?.map((toDo) => (
-                            console.log(toDo.id),
-                            <Box onClick={() => navigate(`/detail/${toDo.id}`, {
-                                replace: false,
-                            })}>
-                                <CheckBox />
-                                <TextWrapper>
-                                    <Text>{toDo.title}</Text>
-                                    <Text size='0.8rem'>{toDo.content}</Text>
-                                </TextWrapper>
-                                <ButtonWrapper>
-                                    <Button><MdEdit/><span>수정</span></Button>
-                                    <Button onClick={(e) => {
-                                        deleteToDo(`http://localhost:3000/todo/${toDo.id}`)
-                                        e.stopPropagation()
-                                        }}><FaTrashAlt /><span>삭제</span></Button>
-                                </ButtonWrapper>
-                            </Box>
-                        ))
-                    }
-                </ToDoList>
+        <ItemContainer completed={toDo.checked}>
+            <input
+                type="checkbox"
+                defaultChecked={toDo.checked}
+                onClick={(e) => handleCheck(e, toDo)}
+            />
+            {!isEditing ? (
+                <ContentContainer onClick={() => navigate(`/detail/${toDo.id}`, {
+                    replace: false,
+                })}>
+                    <TextContainer>
+                        <Text>{toDo.title}</Text>
+                        <Text size="0.8rem" color="#505050">{toDo.content}</Text>
+                    </TextContainer>
+                    <ButtonContainer>
+                        <Button
+                            onClick={(e) => changeEditState(e, toDo)}
+                        >수정</Button>
+                        <Button
+                            onClick={(e) => handleDelete(e, toDo)}
+                        >삭제</Button>
+                    </ButtonContainer>
+                </ContentContainer>
+            ) : (
+                <ContentContainer>
+                    <TextContainer>
+                        <input type="text" name="title" value={editedTitle} onChange={(e) => handleInput(e)}></input>
+                        <input type="text" name="content" value={editedContent} onChange={(e) => handleInput(e)}></input>
+                    </TextContainer>
+                    <ButtonContainer>
+                        <Button onClick={(e) => changeEditState(e)}>취소</Button>
+                        <Button onClick={(e) => handleEdit(e, toDo)} disabled={isInputEmpty()}>수정 완료</Button>
+                    </ButtonContainer>
+                </ContentContainer>)
+            }
+
+        </ItemContainer>
     )
 }
 
-const ToDoList = styled.ul`
-    box-sizing: border-box;
-    width: 100%;
-    /* height: fit-content; */
+const ItemContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    padding: 0;
-    padding-top: 200px;
-`
-
-const CheckBox = styled.input.attrs({ type: 'checkbox' })`
-    
-`
-
-const Box = styled.div`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* position: relative; */
-    width: 100%;
-    height: 5em;
-    border-radius: 0.2rem;
+    padding: 1rem;
     border: 1px solid #ccc;
-    padding: 2em;
-    margin-bottom: 0.5em;
-    cursor: pointer;
-    transition: all 0.5s;
-
-    &:hover {
-        transform: scale(1.1);
-    }
+    border-radius: 0.2rem;
+    background-color: ${props => props.completed ? '#ccc' : 'white'};
 `
 
-const TextWrapper = styled.div`
+const ContentContainer = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+`
+
+const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
+    padding-left: 1rem;
+    text-align: left;
 `
 
 const Text = styled.div`
-    margin-left: 1rem;
-    margin-right: auto;
     font-size: ${props => props.size || '1rem'};
+    color: ${props => props.color || '#000'};
 `
 
-const ButtonWrapper = styled.div`
+const ButtonContainer = styled.div`
     display: flex;
-    align-items: center;
     margin-left: auto;
 `
 
 const Button = styled.button`
-    width: 4em;
-    height: 4em;
-    margin-left: 1em;
-    background-color: #fff;
+    margin-left: 1rem;
+    border: 1px solid #ccc;
+    width: fit-content;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6em;
-    border: 1px solid #ccc;
-    transition: all 0.5s;
-    font-size: 0.8rem;
-    
-
-    &:hover {
-        width: 6em;
-        cursor: pointer;
-    }
-
-    &:first-child:hover {
-        background-color: skyblue;
-    }
-
-    &:last-child:hover {
-        background-color: tomato;
-    }
-
-    &>span {
-        display: none;
-        transition: all 0.5s;
-        margin-left: 0.8em;
-    }
-
-    &:hover>span {
-        display: block;
-    }
 `
 
 export default ToDoItem;

@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import useCustomFetch from '../hooks/useCustomFetch';
+import { useCustomFetch } from '../hooks/useCustomFetch';
 import styled, { keyframes } from 'styled-components';
 import Loading from '../components/loading';
 import NotFoundPage from './notFound';

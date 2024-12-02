@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       { path: "movies/up-coming", element: <UpComing /> },
 
       { path: "login", element: <LogIn /> },
-      { path: "signup", element: <SignUp /> },
+      { path: "/auth/register", element: <SignUp /> },
       { path: "search", element: <div>검색 페이지</div> },
     ],
   },

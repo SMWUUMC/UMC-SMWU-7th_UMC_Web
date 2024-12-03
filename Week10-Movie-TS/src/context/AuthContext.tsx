@@ -102,7 +102,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     },
   });
 
-  // 로그인 함수 리팩토링: useMutation 사용
+  // 로그인 함수 리팩토링 - useMutation 사용
   const handleLogin = useMutation<
     { accessToken: string; refreshToken: string },
     AxiosError<{ message: string }>,

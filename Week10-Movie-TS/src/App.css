@@ -15,6 +15,6 @@ html, body {
 .content {
   margin-left: 210px; /* 사이드바 너비 */
   flex: 1;
-  padding-top: 60px; /* 네비게이션 바 높이 고려 */
+  padding-top: 60px; /* 네비게이션 바 높이 */
   background-color: #000; /* 콘텐츠 영역 배경도 검은색으로 설정 */
 }

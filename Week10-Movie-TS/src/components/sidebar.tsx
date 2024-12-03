@@ -23,7 +23,7 @@ const SidebarMenu = styled.nav`
   flex-direction: column;
   gap: 15px;
   width: 100%;
-  margin-top: 72px; /* 네비게이션 바 아래로 메뉴를 내리기 위한 여백 */
+  margin-top: 72px;
   margin-left: 27px;
 `;
 

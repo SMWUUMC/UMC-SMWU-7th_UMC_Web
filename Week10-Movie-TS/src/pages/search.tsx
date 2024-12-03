@@ -178,7 +178,7 @@ const SearchPage: React.FC = () => {
             ))}
           </SkeletonContainer>
         ) : isError ? (
-          <Message>검색 오류가 발생했습니다.</Message>
+          <Message>검색어를 다시 입력해주세요.</Message>
         ) : movies.length === 0 ? (
           <Message>해당 검색어에 대한 영화 데이터가 없습니다.</Message>
         ) : (

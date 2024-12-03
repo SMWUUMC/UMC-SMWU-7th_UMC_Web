@@ -9,7 +9,7 @@ interface FetchState<T> {
 
 // const { data, isLoading, isError } = useCustomFetch<T>('url');
 const useCustomFetch = <T>(url: string): FetchState<T> => {
-  const [data, setData] = useState<T | null>(null); // 제네릭 타입 T 적용
+  const [data, setData] = useState<T | null>(null); // 제네릭 타입T 적용
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 

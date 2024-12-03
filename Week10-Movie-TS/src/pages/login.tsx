@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import styled from 'styled-components';
 import axios, { AxiosError } from 'axios';
 
-// **스키마 정의**
+// 스키마 정의
 const schema = yup.object().shape({
   email: yup.string().email('올바른 이메일 형식이 아닙니다.').required('이메일을 입력해주세요.'),
   password: yup

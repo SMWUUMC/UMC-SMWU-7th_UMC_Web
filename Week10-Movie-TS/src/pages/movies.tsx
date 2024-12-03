@@ -45,7 +45,7 @@ const CategoryCard = styled.div<{ color: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ color }) => color}; /* 각 카테고리 색상 설정 */
+  background-color: ${({ color }) => color};
   cursor: pointer;
 
   &:hover {

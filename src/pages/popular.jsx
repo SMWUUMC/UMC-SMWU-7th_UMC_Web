@@ -1,6 +1,7 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "../apis/axios-instance";
 import useCustomFetch from "../hooks/useCustomFetch";
 
 import styled from "styled-components";
@@ -8,12 +9,23 @@ import CardListSkeleton from "../components/Card/Skeleton/card-list-skeleton";
 import MovieCard from "../components/Card/MovieCard";
 import * as S from "./Search/search.style";
 
+// API 요청 함수
+const fetchMovies = async () => {
+  const response = await axiosInstance.get("/movie/popular", {
+    params: {
+      language: "ko-KR",
+      page: 1,
+    },
+  });
+  return response.data; // 데이터만 반환
+};
+
 const Popular = () => {
   const {
     data: movies,
     isLoading,
     isError,
-  } = useCustomFetch(`/movie/popular?language=ko-KR&page=1`);
+  } = useQuery({ queryKey: ["popular"], queryFn: fetchMovies });
 
   if (isLoading) {
     return (
@@ -34,7 +46,7 @@ const Popular = () => {
 
   return (
     <MovieListGrid>
-      {movies.data?.results.map((movie) => (
+      {movies?.results.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
     </MovieListGrid>

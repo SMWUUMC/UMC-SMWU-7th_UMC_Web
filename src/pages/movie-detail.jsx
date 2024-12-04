@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../apis/axios-instance.js";
 import styled from "styled-components";
+import MovieDetailSkeleton from "./movie-detail-skeleton.jsx";
+
+// 영화 상세 정보 API 호출 함수
+const fetchMovieDetails = async (movieId) => {
+  const response = await axiosInstance.get(`/movie/${movieId}`, {
+    params: {
+      append_to_response: "credits", // 감독/출연진 정보 추가
+      language: "ko", // 한국어로 요청
+    },
+  });
+  return response.data;
+};
 
 const MovieDetail = () => {
   const { movieId } = useParams();
-  const [movieData, setMovieData] = useState(null);
 
-  useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const response = await axiosInstance.get(`/movie/${movieId}`, {
-          params: {
-            append_to_response: "credits", // 감독/출연진 정보 추가
-            language: "ko", // 한국어로 요청
-          },
-        });
-        setMovieData(response.data);
-      } catch (error) {
-        console.error("Error fetching movie details:", error);
-      }
-    };
-
-    fetchMovieDetails();
-  }, [movieId]);
-
+  // useQuery로 데이터 호출
+  const {
+    data: movieData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["movieDetail", movieId], // 쿼리 키와 movieId
+    queryFn: () => fetchMovieDetails(movieId),
+    enabled: !!movieId, // movieId가 존재할 때만 실행
+  });
+  if (isLoading) return <MovieDetailSkeleton />;
+  if (isError) return <div>영화 정보를 불러오는 데 실패했습니다.</div>;
   if (!movieData) return <div>로딩 중입니다...</div>;
 
   const {

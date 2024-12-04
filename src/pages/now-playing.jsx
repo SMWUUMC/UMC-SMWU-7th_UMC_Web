@@ -1,6 +1,7 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "../apis/axios-instance";
 import useCustomFetch from "../hooks/useCustomFetch";
 
 import styled from "styled-components";
@@ -8,28 +9,23 @@ import CardListSkeleton from "../components/Card/Skeleton/card-list-skeleton";
 import MovieCard from "../components/Card/MovieCard";
 import * as S from "./Search/search.style";
 
-const NowPlaying = () => {
-  // const [movies, setMovies] = useState([]);
+// API 요청 함수
+const fetchMovies = async () => {
+  const response = await axiosInstance.get("/movie/now_playing", {
+    params: {
+      language: "ko-KR",
+      page: 1,
+    },
+  });
+  return response.data; // 데이터만 반환
+};
 
-  // useEffect(() => {
-  //   const getMovies = async () => {
-  //     const movies = await axios.get(
-  //       `https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYWEzYmVkZjBiYTllN2I4MzE4NTg0NDVhMzFhZGI4NCIsIm5iZiI6MTczMDU0MTk5OC45NDk2MzMsInN1YiI6IjY3MjVmN2UyMWY2MWE0YThlODI1OGVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KnEIWTmV0FkRAW_wKfI2k_JZE03sODilWY5pIF6bwOs`,
-  //         },
-  //       }
-  //     );
-  //     setMovies(movies);
-  //   };
-  //   getMovies();
-  // }, []);
+const NowPlaying = () => {
   const {
     data: movies,
     isLoading,
     isError,
-  } = useCustomFetch(`/movie/now_playing?language=ko-KR&page=1`);
+  } = useQuery({ queryKey: ["nowPlaying"], queryFn: fetchMovies });
 
   if (isLoading) {
     return (
@@ -47,10 +43,9 @@ const NowPlaying = () => {
       </div>
     );
   }
-
   return (
     <MovieListGrid>
-      {movies.data?.results.map((movie) => (
+      {movies?.results.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
     </MovieListGrid>

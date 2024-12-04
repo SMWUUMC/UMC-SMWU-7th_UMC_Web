@@ -1,12 +1,17 @@
 import styled, { keyframes } from "styled-components";
 
 const skeleton = keyframes`
-0% {
-opacity:1;}
-30% {opacity:0.7;}
-50% {opacity:0.4;}
-80% {opacity:0.8;}
-100% {opacity:1;}`;
+  0% {
+    opacity:1;
+  } 30% {
+    opacity:0.7;
+  } 50% {
+    opacity:0.4;
+  } 80% {
+    opacity:0.8;
+  } 100% {
+    opacity:1;
+  }`;
 
 const Container = styled.div`
   display: flex;

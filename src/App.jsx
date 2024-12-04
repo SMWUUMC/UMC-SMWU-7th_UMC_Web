@@ -17,6 +17,7 @@ import RootLayout from "./layout/root-layout.jsx";
 import MovieDetail from "./pages/movie-detail.jsx";
 import LogIn from "./pages/log-in.jsx";
 import SignUp from "./pages/sign-up.jsx";
+import Search from "./pages/Search/search.jsx";
 
 // 전역 스타일 정의
 const GlobalStyle = createGlobalStyle`
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
 
       { path: "login", element: <LogIn /> },
       { path: "/auth/register", element: <SignUp /> },
-      { path: "search", element: <div>검색 페이지</div> },
+      { path: "search", element: <Search /> },
     ],
   },
 ]);

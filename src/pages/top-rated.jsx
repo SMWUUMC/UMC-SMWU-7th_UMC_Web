@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useCustomFetch from "../hooks/useCustomFetch";
 
-import { MOVIES } from "../mocks/movies";
-import MovieCard from "../components/MovieCard";
 import styled from "styled-components";
+import MovieCard from "../components/Card/MovieCard";
+import CardListSkeleton from "../components/Card/Skeleton/card-list-skeleton";
+import * as S from "./Search/search.style";
 
 const TopRated = () => {
   const {
@@ -15,11 +16,10 @@ const TopRated = () => {
   } = useCustomFetch(`/movie/top_rated?language=ko-KR&page=1`);
 
   if (isLoading) {
-    // 로딩중 처리
     return (
-      <div>
-        <h1 style={{ color: "white" }}>로딩중입니다...</h1>
-      </div>
+      <S.MovieGridContainer>
+        <CardListSkeleton number={20} />
+      </S.MovieGridContainer>
     );
   }
 

@@ -2,9 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { MOVIES } from "../mocks/movies";
-import MovieCard from "./MovieCard";
 import styled from "styled-components";
+import MovieCard from "./Card/MovieCard";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);

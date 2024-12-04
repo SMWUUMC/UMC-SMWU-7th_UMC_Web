@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useCustomFetch from "../hooks/useCustomFetch";
 
-import { MOVIES } from "../mocks/movies";
-import MovieCard from "../components/MovieCard";
 import styled from "styled-components";
+import CardListSkeleton from "../components/Card/Skeleton/card-list-skeleton";
+import MovieCard from "../components/Card/MovieCard";
+import * as S from "./Search/search.style";
 
 const Popular = () => {
   const {
@@ -15,11 +16,10 @@ const Popular = () => {
   } = useCustomFetch(`/movie/popular?language=ko-KR&page=1`);
 
   if (isLoading) {
-    // 로딩중 처리
     return (
-      <div>
-        <h1 style={{ color: "white" }}>로딩중입니다...</h1>
-      </div>
+      <S.MovieGridContainer>
+        <CardListSkeleton number={20} />
+      </S.MovieGridContainer>
     );
   }
 

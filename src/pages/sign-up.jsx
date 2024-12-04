@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axiosInstance } from "../apis/axios-instance";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -41,6 +42,12 @@ const SignUp = () => {
           email: data.email,
           password: data.password,
           passwordCheck: data.passwordCheck,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // JSON 요청
+            Authorization: `Bearer ${process.env.REACT_APP_TMDB_TOKEN}`, // 필요 시 토큰 추가
+          },
         }
       );
 

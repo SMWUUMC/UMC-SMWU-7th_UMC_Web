@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Logo = styled.button`
-  color: red;
+  color: #f82e62;
   border: none;
   cursor: pointer;
   border: none;
@@ -26,7 +26,7 @@ const LogInButton = styled.button`
 
 const SignUpButton = styled.button`
   color: white;
-  background-color: red;
+  background-color: #f82e62;
   cursor: pointer;
   border: none;
   border-radius: 8px;
@@ -59,7 +59,7 @@ const NavBar = () => {
         <StyledLink to={"/login"}>
           <LogInButton>로그인</LogInButton>
         </StyledLink>
-        <StyledLink to={"/signup"}>
+        <StyledLink to={"/auth/register"}>
           <SignUpButton>회원가입</SignUpButton>
         </StyledLink>
       </span>

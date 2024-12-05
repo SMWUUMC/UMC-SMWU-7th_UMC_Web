@@ -76,6 +76,10 @@ const MovieDetail = () => {
             width: "calc(100vw - 150px)",
             objectFit: "cover",
           }}
+          onError={(e) =>
+            (e.target.src =
+              "https://archives.hangeul.go.kr/resource/template/images/img_none_01.png")
+          }
         />
       </div>
 

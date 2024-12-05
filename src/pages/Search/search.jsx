@@ -37,9 +37,9 @@ const Search = () => {
         />
         <button onClick={handleSearchMovie}>검색</button>
       </S.SearchContainer>
-      <S.MovieGridContainer>
-        <SearchMovieList />
-      </S.MovieGridContainer>
+      {/* <S.MovieGridContainer> */}
+      <SearchMovieList />
+      {/* </S.MovieGridContainer> */}
     </div>
   );
 };

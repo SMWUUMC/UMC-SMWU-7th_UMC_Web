@@ -30,11 +30,11 @@ const SearchContainer = styled.div`
 `;
 
 const MovieGridContainer = styled.div`
-  margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 13px;
-  width: 100%;
+  width: 100%; /* 부모 컨테이너가 화면에 맞게 크기 조정 */
+  padding: 16px;
 `;
 
 export { SearchContainer, MovieGridContainer };

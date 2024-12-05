@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../apis/axios-instance";
 import useCustomFetch from "../hooks/useCustomFetch";
 
-import styled from "styled-components";
 import CardListSkeleton from "../components/Card/Skeleton/card-list-skeleton";
 import MovieCard from "../components/Card/MovieCard";
 import * as S from "./Search/search.style";
+import { LoadingSpinner } from "./loading-spinner.style";
 
-// API 요청 함수
-const fetchMovies = async () => {
+const fetchMovies = async ({ pageParam = 1 }) => {
   const response = await axiosInstance.get("/movie/popular", {
     params: {
       language: "ko-KR",
-      page: 1,
+      page: pageParam,
     },
   });
-  return response.data; // 데이터만 반환
+  return response.data;
 };
 
 const Popular = () => {
@@ -25,7 +25,37 @@ const Popular = () => {
     data: movies,
     isLoading,
     isError,
-  } = useQuery({ queryKey: ["popular"], queryFn: fetchMovies });
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["popular"],
+    queryFn: fetchMovies,
+    getNextPageParam: (lastPage) => {
+      return lastPage.page < lastPage.total_pages
+        ? lastPage.page + 1 // 다음 페이지 번호 반환
+        : undefined; // 더 이상 로드할 페이지가 없으면 undefined 반환
+    },
+  });
+
+  const observerRef = useRef(); // Intersection Observer 참조를 위한 Ref
+
+  // 마지막 요소를 관찰하는 콜백 함수
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isFetchingNextPage) return; // 데이터가 로딩 중이면 관찰하지 않음
+      if (observerRef.current) observerRef.current.disconnect(); // 기존 Observer 해제
+
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage(); // 사용자가 마지막 요소를 보면 다음 페이지 요청
+        }
+      });
+
+      if (node) observerRef.current.observe(node); // 새로운 요소 관찰 시작
+    },
+    [isFetchingNextPage, fetchNextPage, hasNextPage]
+  );
 
   if (isLoading) {
     return (
@@ -43,25 +73,20 @@ const Popular = () => {
       </div>
     );
   }
-
   return (
-    <MovieListGrid>
-      {movies?.results.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </MovieListGrid>
+    <S.MovieGridContainer>
+      {movies.pages.map((page) =>
+        page.results.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+      )}
+      <div ref={lastElementRef} style={{ height: "20px" }} />
+      {isFetchingNextPage && (
+        <>
+          <LoadingSpinner />
+        </>
+      )}
+      {!hasNextPage && <p>끝</p>}
+    </S.MovieGridContainer>
   );
 };
 
 export default Popular;
-
-const MovieListGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(200px, 1fr)
-  ); /* 화면에 맞게 카드 배치 */
-  gap: 13px; /* 카드 간 간격 */
-  width: 100%; /* 부모 컨테이너가 화면에 맞게 크기 조정 */
-  padding: 16px;
-`;

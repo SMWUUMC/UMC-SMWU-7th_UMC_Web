@@ -34,11 +34,11 @@ const SearchMovieList = () => {
   }
 
   return (
-    <>
+    <S.MovieGridContainer>
       {movies.data?.results.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
-    </>
+    </S.MovieGridContainer>
   );
 };
 

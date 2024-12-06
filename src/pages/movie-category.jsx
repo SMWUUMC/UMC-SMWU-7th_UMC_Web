@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const CategoryContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+  width: 100%;
 `;
 
 const CategoryLink = styled(Link)`
-  textdecoration: none;
   color: white;
   position: relative;
+  cursor: default;
 `;
 
 const CategoryImg = styled.img`
@@ -18,6 +21,7 @@ const CategoryImg = styled.img`
   object-fit: cover;
   border-radius: 5px;
   margin: 10px;
+  cursor: pointer;
 `;
 
 const CategoryTitle = styled.p`
@@ -28,6 +32,7 @@ const CategoryTitle = styled.p`
   opacity: 0.8;
   padding: 5px;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const MovieCategory = () => {

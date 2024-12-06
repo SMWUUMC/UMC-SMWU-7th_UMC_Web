@@ -20,6 +20,7 @@ const MovieCard = ({ movie }) => {
               "https://archives.hangeul.go.kr/resource/template/images/img_none_01.png")
           }
         />
+        <S.Overlay />
         <S.TextWrapper>
           <S.TitleBox>{movie.title}</S.TitleBox>
           <S.DescriptionBox>{movie.release_date}</S.DescriptionBox>

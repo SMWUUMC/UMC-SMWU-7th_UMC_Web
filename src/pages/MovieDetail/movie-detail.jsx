@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "../apis/axios-instance.js";
+import { axiosInstance } from "../../apis/axios-instance.js";
 import styled from "styled-components";
 import MovieDetailSkeleton from "./movie-detail-skeleton.jsx";
 
@@ -29,6 +29,7 @@ const MovieDetail = () => {
     queryFn: () => fetchMovieDetails(movieId),
     enabled: !!movieId, // movieId가 존재할 때만 실행
   });
+
   if (isLoading) return <MovieDetailSkeleton />;
   if (isError) return <div>영화 정보를 불러오는 데 실패했습니다.</div>;
   if (!movieData) return <div>로딩 중입니다...</div>;

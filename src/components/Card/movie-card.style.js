@@ -12,8 +12,23 @@ const PosterImg = styled.img`
   height: 210px;
   border-radius: 10px;
   overflow: hidden;
+`;
 
-  // 커서 올렸을 때 효과 추가하면 좋을 것 같다
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 210px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -36,4 +51,11 @@ const DescriptionBox = styled.div`
   font-size: 11px;
 `;
 
-export { MoviePosterCard, PosterImg, TextWrapper, TitleBox, DescriptionBox };
+export {
+  MoviePosterCard,
+  PosterImg,
+  Overlay,
+  TextWrapper,
+  TitleBox,
+  DescriptionBox,
+};

@@ -18,6 +18,7 @@ const LogInButton = styled.button`
   background: none;
   border: none;
   font-family: "Freesentation-9Black";
+  margin-right: 10px;
 
   &:hover {
     color: #aaa;
@@ -45,8 +46,14 @@ const StyledLink = styled(Link)`
 const Nav = styled.nav`
   background-color: #363636;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 `;
 
 const NavBar = () => {
@@ -55,7 +62,7 @@ const NavBar = () => {
       <StyledLink to={"/"}>
         <Logo>YONGCHA</Logo>
       </StyledLink>
-      <span style={{ alignItems: "flex-start" }}>
+      <span style={{ alignItems: "flex-start", marginRight: "10px" }}>
         <StyledLink to={"/login"}>
           <LogInButton>로그인</LogInButton>
         </StyledLink>

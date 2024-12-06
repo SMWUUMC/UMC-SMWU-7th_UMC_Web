@@ -7,8 +7,8 @@ const RootLayout = () => {
   return (
     <>
       <NavBar />
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <SideBar />
+      <SideBar />
+      <div style={{ marginTop: "44px", marginLeft: "150px" }}>
         <Outlet />
       </div>
     </>

@@ -1,50 +1,24 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
 import MovieList from "./components/MovieList";
 import NavBar from "./components/NavBar";
 
 // 1. 만든 페이지들을 import
-import HomePage from "./pages/home.jsx";
+import HomePage from "./pages/Home/home.jsx";
 import NotFound from "./pages/not-found.jsx";
 import Movies from "./pages/movies.jsx";
 import MovieCategory from "./pages/movie-category.jsx";
-import NowPlaying from "./pages/now-playing.jsx";
-import Popular from "./pages/popular.jsx";
-import TopRated from "./pages/top-rated.jsx";
-import UpComing from "./pages/up-coming.jsx";
+import MovieDetail from "./pages/MovieDetail/movie-detail.jsx";
+import NowPlaying from "./pages/NowPlaying/now-playing.jsx";
+import Popular from "./pages/Popular/popular.jsx";
+import TopRated from "./pages/TopRated/top-rated.jsx";
+import UpComing from "./pages/UpComing/up-coming.jsx";
 import RootLayout from "./layout/root-layout.jsx";
-import MovieDetail from "./pages/movie-detail.jsx";
-import LogIn from "./pages/log-in.jsx";
-import SignUp from "./pages/sign-up.jsx";
+import LogIn from "./pages/Login/log-in.jsx";
+import SignUp from "./pages/SignUp/sign-up.jsx";
 import Search from "./pages/Search/search.jsx";
-
-// 전역 스타일 정의
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'yg-jalnan';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Freesentation-9Black';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-    font-weight: 900;
-    font-style: normal;
-  }
-
-  body {
-    font-family: 'Freesentation-9Black';
-    margin: 0;
-    // height: 100vh;
-    // width: 100vw;
-    background-color: black;
-    color: white;
-  }
-`;
 
 //2. 연결
 const router = createBrowserRouter([
@@ -77,9 +51,9 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <>
-      <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

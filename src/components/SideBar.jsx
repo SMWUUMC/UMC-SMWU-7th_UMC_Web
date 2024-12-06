@@ -8,7 +8,11 @@ const SideBarContainer = styled.div`
   flex-direction: column;
   background-color: #363636;
   width: 150px;
-  min-height: 100vh;
+  height: calc(100% - 44px);
+  position: fixed;
+  top: 44px;
+  left: 0;
+  z-index: 999;
 `;
 
 const StyledLink = styled(Link)`
@@ -18,7 +22,7 @@ const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
   font-size: 18px;
-  margin: 10px 10px;
+  margin: 10px 15px;
 
   &:hover {
     color: #aaa;

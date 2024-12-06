@@ -1,4 +1,4 @@
-import * as S from "./movie-detail-skeleton.style.js";
+import * as S from "./MovieDetail/movie-detail-skeleton.style.js";
 
 const CreditSkeleton = () => {
   return (

@@ -1,5 +1,5 @@
 import * as S from "./movie-detail-skeleton.style.js";
-import CreditListSkeleton from "./credit-list-skeleton.jsx";
+import CreditListSkeleton from "../credit-list-skeleton.jsx";
 import { CreditGridContainer } from "./movie-detail.style.js";
 
 const MovieDetailSkeleton = () => {

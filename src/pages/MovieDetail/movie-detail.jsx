@@ -17,6 +17,7 @@ const fetchMovieDetails = async (movieId) => {
 };
 
 const MovieDetail = () => {
+  window.scrollTo(0, 0);
   const { movieId } = useParams();
 
   // useQuery로 데이터 호출

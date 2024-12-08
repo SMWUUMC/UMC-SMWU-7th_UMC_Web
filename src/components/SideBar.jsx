@@ -6,7 +6,7 @@ import { BsFilm, BsSearch } from "react-icons/bs";
 const SideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #363636;
+  background-color: #141416;
   width: 150px;
   height: calc(100% - 44px);
   position: fixed;

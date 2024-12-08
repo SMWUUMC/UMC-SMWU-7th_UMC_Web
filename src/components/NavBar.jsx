@@ -44,7 +44,7 @@ const StyledLink = styled(Link)`
 `;
 
 const Nav = styled.nav`
-  background-color: #363636;
+  background-color: #141416;
   display: flex;
   align-items: center;
   justify-content: space-between;

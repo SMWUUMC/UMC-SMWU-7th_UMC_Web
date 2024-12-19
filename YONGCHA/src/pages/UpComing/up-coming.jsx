@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CardListSkeleton from "../../components/Card/Skeleton/card-list-skeleton";
-import MovieCard from "../../components/Card/MovieCard";
-import * as S from "../Search/search.style";
+import CardListSkeleton from "../../components/Card/Skeleton/card-list-skeleton.jsx";
+import MovieCard from "../../components/Card/MovieCard.jsx";
+import * as S from "../Search/search.style.js";
 import {
   PaginationButtonBox,
   PaginationButton,

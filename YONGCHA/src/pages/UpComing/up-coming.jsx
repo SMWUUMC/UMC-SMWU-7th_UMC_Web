@@ -14,7 +14,7 @@ const UpComing = () => {
 
   const {
     data: movies,
-    isPending, //IsLoading은 재시도 중일 때도 true이므로 IsPending 사용
+    isPending, // IsLoading은 재시도 중일 때도 true이므로 IsPending 사용
     isError,
     isFetching,
   } = useQuery({
